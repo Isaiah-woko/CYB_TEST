@@ -514,9 +514,9 @@ document.addEventListener('DOMContentLoaded', () => {
         scoreElement: document.getElementById('score'),
         reviewElement: document.getElementById('review'),
         nextBtn: document.getElementById('nextBtn'),
+        resetBtn: document.getElementById('resetBtn'),
         retryBtn: document.getElementById('retryBtn'),
-        darkModeToggle: document.getElementById('darkModeToggle'),
-        timerToggle: document.getElementById('timerToggle') // Add this to your HTML
+        darkModeToggle: document.getElementById('darkModeToggle')
     };
 
     // ======================
@@ -569,19 +569,50 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Quiz navigation
         elements.nextBtn.addEventListener('click', nextQuestion);
-        elements.retryBtn.addEventListener('click', () => location.reload());
+        elements.resetBtn.addEventListener('click', resetQuiz);
+        elements.retryBtn.addEventListener('click', retryQuiz);
         elements.darkModeToggle.addEventListener('click', toggleDarkMode);
+    }
+
+    // Reset current quiz attempt
+    function resetQuiz() {
+        // Reset quiz state
+        state.currentQuestion = 0;
+        state.userAnswers = [];
+        state.timeLeft = 1800;
+        
+        // Clear selected answers
+        const options = document.querySelectorAll('input[name="answer"]');
+        options.forEach(option => {
+            option.checked = false;
+        });
+        
+        // Restart timer if enabled
+        if (state.timerEnabled) {
+            startTimer();
+        }
+        
+        // Show first question
+        showQuestion();
+    }
+
+    // Start a new quiz attempt
+    function retryQuiz() {
+        // Hide result screen and show quiz screen
+        elements.resultScreen.style.display = 'none';
+        elements.quizScreen.style.display = 'block';
+        
+        // Start new quiz with same course
+        elements.retryBtn.addEventListener('click', () => location.reload());
     }
 
     // Start quiz for a specific course
     function startQuiz(courseId) {
         state.currentCourse = courseId;
-        // Get all questions for the course
         const allQuestions = courses[courseId].questions;
         
-        // Shuffle and select only 50 questions
+        // Shuffle and select 50 questions
         state.questions = shuffleArray(allQuestions).slice(0, 50);
-        
         state.userAnswers = [];
         state.currentQuestion = 0;
         state.timeLeft = 1800;
@@ -591,7 +622,7 @@ document.addEventListener('DOMContentLoaded', () => {
         elements.quizScreen.style.display = 'block';
         elements.resultScreen.style.display = 'none';
 
-        // Show/hide timer based on user preference
+        // Handle timer display
         if (state.timerEnabled) {
             elements.timeElement.style.display = 'block';
             startTimer();
@@ -602,7 +633,7 @@ document.addEventListener('DOMContentLoaded', () => {
         showQuestion();
     }
 
-    // Helper function to shuffle an array (Fisher-Yates algorithm)
+    // Helper function to shuffle array
     function shuffleArray(array) {
         const newArray = [...array];
         for (let i = newArray.length - 1; i > 0; i--) {
@@ -615,6 +646,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Timer functionality
     function startTimer() {
         clearInterval(state.timerId);
+        updateTimerDisplay();
         
         state.timerId = setInterval(() => {
             state.timeLeft--;
@@ -694,7 +726,6 @@ document.addEventListener('DOMContentLoaded', () => {
     function showResults(score) {
         elements.quizScreen.style.display = 'none';
         elements.resultScreen.style.display = 'block';
-        
         elements.scoreElement.textContent = `${score}/${state.questions.length}`;
         elements.reviewElement.innerHTML = generateReviewHtml(score);
     }
