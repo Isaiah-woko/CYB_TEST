@@ -576,25 +576,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Reset current quiz attempt
     function resetQuiz() {
-        // Reset quiz state
-        state.currentQuestion = 0;
-        state.userAnswers = [];
-        state.timeLeft = 1800;
-        
-        // Clear selected answers
-        const options = document.querySelectorAll('input[name="answer"]');
-        options.forEach(option => {
-            option.checked = false;
-        });
-        
-        // Restart timer if enabled
-        if (state.timerEnabled) {
-            startTimer();
-        }
-        
-        // Show first question
-        showQuestion();
+        if (confirm('Are you sure you want to reset this quiz? All your progress will be lost.')) {
+            state.currentQuestion = 0;
+            state.userAnswers = [];
+            state.timeLeft = 1800;
+            // Clear selected answers
+            const options = document.querySelectorAll('input[name="answer"]');
+            options.forEach(option => {
+                option.checked = false;
+            });
+            
+            // Restart timer if enabled
+            if (state.timerEnabled) {
+                startTimer();
+            }
+            
+            // Show first question
+            showQuestion();
+            }
     }
+    
 
     // Start a new quiz attempt
     function retryQuiz() {
