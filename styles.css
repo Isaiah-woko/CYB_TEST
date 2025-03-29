@@ -1,0 +1,372 @@
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #3498db;
+    --background: white;
+    --text-color: #333;
+}
+
+.dark-mode {
+    --background: #2c3e50;
+    --text-color: white;
+}
+
+* {
+    box-sizing: border-box;
+    transition: background-color 0.3s, color 0.3s;
+}
+/* Add to styles.css */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+}
+
+h1, h2, h3 {
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* Update the .btn class */
+.btn {
+    padding: 12px 30px;
+    border: 2px solid transparent;
+    border-radius: 50px;
+    cursor: pointer;
+    background: linear-gradient(45deg, #3498db, #2c3e50);
+    color: white;
+    font-weight: bold;
+    font-size: 1rem;
+    box-shadow: 0 5px 20px rgba(52, 152, 219, 0.4);
+    transition: all 0.4s ease-in-out;
+    position: relative;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Hover Effect */
+.btn:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 10px 25px rgba(52, 152, 219, 0.5);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Active (Click) Effect */
+.btn:active {
+    transform: translateY(0) scale(1);
+    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+}
+
+/* Gradient Overlay Animation */
+.btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #2c3e50, #3498db);
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* Glow Effect on Hover */
+.btn:hover::after {
+    opacity: 0.3;
+}
+
+/* Glassmorphism Effect */
+.btn::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 10%, transparent 50%);
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+}
+
+/* Activate Glass Effect on Hover */
+.btn:hover::before {
+    opacity: 0.2;
+}
+
+.timer-option {
+    margin: 10px 0;
+    padding: 5px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 5px;
+}
+
+.timer-option label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.timer-option input[type="checkbox"] {
+    margin-right: 8px;
+}
+
+.question-container {
+    opacity: 1;
+    transition: opacity 0.3s;
+}
+
+.question {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.options label {
+    display: block;
+    margin: 10px 0;
+    padding: 10px;
+    background: #ecf0f1;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.timer {
+    font-size: 1.2em;
+    color: var(--secondary-color);
+}
+
+#darkModeToggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+}
+
+/* Add to styles.css */
+.hero {
+    text-align: center;
+    padding: 2rem 0;
+    animation: fadeIn 1s ease-in;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(90deg, #3498db, #2c3e50);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    color: var(--text-color);
+    margin-bottom: 2rem;
+}
+
+#hero-img {
+    width: 100%; /* Adjust to fit the container */
+    max-width: 600px; /* Limits size for responsiveness */
+    height: auto; /* Maintains aspect ratio */
+    display: block; /* Removes extra spacing */
+    margin: 0 auto; /* Centers the image */
+  }
+
+/* Course Selection Styles */
+.course-selection {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.course-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.course-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.course-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.course-image {
+    height: 160px;
+    background-size: cover;
+    background-position: center;
+}
+
+.course-info {
+    padding: 1.5rem;
+}
+
+.course-info h3 {
+    margin: 0 0 0.5rem;
+    color: var(--secondary-color);
+}
+
+.course-info p {
+    color: var(--text-color);
+    opacity: 0.8;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+}
+
+.start-course-btn {
+    width: 100%;
+    padding: 0.8rem;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(45deg, #3498db, #2c3e50);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.start-course-btn:hover {
+    background: linear-gradient(45deg, #2c3e50, #3498db);
+}
+
+/* Dark mode adjustments */
+.dark-mode .course-card {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+@media (max-width: 768px) {
+    .course-cards {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Add to styles.css */
+.features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin: 3rem 0;
+}
+
+.feature-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.feature-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.feature-card h3 {
+    margin: 0.5rem 0;
+    color: var(--secondary-color);
+}
+
+/* Add to styles.css */
+body::before {
+    content: '';
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(52, 152, 219, 0.1) 0%, transparent 70%);
+    z-index: -1;
+    animation: float 15s infinite linear;
+}
+
+body::after {
+    content: '';
+    position: fixed;
+    bottom: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(44, 62, 80, 0.1) 0%, transparent 70%);
+    z-index: -1;
+    animation: float 20s infinite linear reverse;
+}
+
+/* Add to styles.css */
+.footer {
+    text-align: center;
+    margin-top: 3rem;
+    padding: 1.5rem 0;
+    color: var(--text-color);
+    opacity: 0.7;
+    font-size: 0.9rem;
+}
+
+@keyframes float {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    25% { transform: translate(5%, 5%) rotate(5deg); }
+    50% { transform: translate(10%, 0) rotate(0deg); }
+    75% { transform: translate(5%, -5%) rotate(-5deg); }
+    100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+/* Update media queries */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2rem;
+    }
+    
+    .features {
+        grid-template-columns: 1fr;
+    }
+    
+    .hero-image {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+    
+    .hero h1 {
+        font-size: 1.8rem;
+    }
+}
